@@ -1,94 +1,24 @@
-<!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#ffcf4a">
-<title>Мир Вовки</title>
-<style>
-:root{--ink:#46345f;--cream:#fff8e8}
-*{box-sizing:border-box}body{margin:0;font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;background:linear-gradient(145deg,#fff2c7,#ffe3ed 55%,#dff4ff);color:var(--ink);min-height:100vh}
-header{padding:22px 18px 14px;display:flex;justify-content:space-between;align-items:center}
-h1{font-size:30px;margin:0;color:#6545a0}header p{margin:5px 0 0;font-size:14px;color:#806b91}
-.avatar{font-size:42px;background:white;border-radius:22px;padding:8px;box-shadow:0 5px 0 #ead8ff}
-main{max-width:720px;margin:auto;padding:0 15px 32px}
-.hero{background:linear-gradient(120deg,#8edcff,#b7f0d0);border:4px solid white;border-radius:28px;padding:15px;text-align:center;box-shadow:0 7px 0 #b8d9e4}
-.hero .scene{font-size:72px;letter-spacing:4px;line-height:1.3}.hero strong{font-size:21px}.hero p{margin:5px 0 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:16px 0}
-.tile{border:4px solid white;border-radius:24px;padding:13px 10px;min-height:142px;text-align:center;box-shadow:0 6px 0 #d9cfe8;cursor:pointer;color:white;font-weight:900;font-size:20px}
-.tile .emoji{font-size:48px;display:block;margin-bottom:4px}.tile small{display:block;font-size:12px;font-weight:600;margin-top:4px}
-.animals{background:#ff777d}.vehicles{background:#42b9e9}.words{background:#f4b83f}.games{background:#85c96d}
-.panel{background:#fff;border:4px solid white;border-radius:25px;padding:16px;margin-top:15px;box-shadow:0 6px 0 #e5d9ee;text-align:center}
-.panel h2{margin:0 0 9px;color:#6847a1}.bigpic{font-size:100px;line-height:1.35;min-height:120px}
-.name{font-size:27px;font-weight:900}.desc{font-size:16px;color:#78688c;margin:6px 0 12px}
-button{border:0;border-radius:18px;padding:13px 17px;font-size:17px;font-weight:900;background:#7551b8;color:white;box-shadow:0 4px 0 #56378f;margin:4px;cursor:pointer}
-button.alt{background:#ffb938;box-shadow:0 4px 0 #d68b15;color:#533d21}button.green{background:#5cbd78;box-shadow:0 4px 0 #378d52}
-.choices{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.choices button{background:#55bce7;box-shadow:0 4px 0 #288bb8}
-.car{display:inline-block;animation:drive 2.3s ease-in-out infinite alternate}@keyframes drive{from{transform:translateX(-28px)}to{transform:translateX(28px)}}
-.flash{animation:flash .55s infinite alternate}@keyframes flash{from{filter:drop-shadow(0 0 2px #ff4b4b)}to{filter:drop-shadow(0 0 18px #ff3030)}}
-.paw{display:inline-block;animation:paw .7s infinite alternate;transform-origin:70% 80%}@keyframes paw{to{transform:rotate(-18deg)}}
-#toast{min-height:28px;color:#6a49a0;font-weight:800;margin-top:8px}
-footer{text-align:center;font-size:12px;color:#8b7b98;padding:18px}
-</style></head>
-<body>
-<header><div><h1>🌈 Мир Вовки</h1><p>Играем, слушаем, изучаем!</p></div><div class="avatar">🧸</div></header>
-<main>
-<section class="hero"><div class="scene">🦁 🐘 🦒 🐵</div><strong>Привет, Вовка!</strong><p>Давай вместе открывать большой мир!</p></section>
-<section class="grid">
-<button class="tile animals" onclick="showSection('animals')"><span class="emoji">🐾</span>Животные<small>Кто как говорит?</small></button>
-<button class="tile vehicles" onclick="showSection('vehicles')"><span class="emoji">🚒</span>Техника<small>Моторы и сирены!</small></button>
-<button class="tile words" onclick="showSection('words')"><span class="emoji">🍎</span>Первые слова<small>Слова вокруг нас</small></button>
-<button class="tile games" onclick="showGame()"><span class="emoji">⭐</span>Игры<small>Найди картинку</small></button>
-</section>
-<section class="panel" id="content">
-<h2>Выбери, что будем изучать!</h2><div class="bigpic">🐱 🚗 🚁</div>
-<div class="desc">Нажимай на большие кнопки — всё оживает.</div>
-</section>
-<footer>Для игры вместе со взрослым • Русский язык</footer>
-</main>
-<script>
-const data={
-animals:[
-['🐱','Кошечка','Мяу-мяу!','Кошечка говорит: мяу-мяу!'],
-['🐶','Собачка','Гав-гав!','Собачка говорит: гав-гав!'],
-['🐦‍⬛','Ворона','Кар-кар!','Ворона каркает: кар-кар!'],
-['🦜','Попугай','Чик-чирик!','Попугай может повторять слова.'],
-['🐴','Лошадка','И-го-го!','Лошадка ржёт: и-го-го!'],
-['🐎','Пони','И-го-го!','Пони — маленькая лошадка.'],
-['🐬','Дельфин','Пи-и!','Дельфин издаёт звонкие звуки.'],
-['🐄','Корова','Му-у!','Корова мычит: му-у!'],
-['🐑','Овечка','Бе-е!','Овечка блеет: бе-е!'],
-['🦁','Лев','Р-р-р!','Лев громко рычит.'],
-['🐘','Слон','Ту-у!','Слон трубит хоботом.'],
-['🦆','Уточка','Кря-кря!','Уточка крякает: кря-кря!']
-],
-vehicles:[
-['🚑','Скорая помощь','У-у-у!','Скорая помощь спешит помочь людям.'],
-['🚒','Пожарная машина','У-у-у!','Пожарная машина тушит пожар.'],
-['🚓','Полицейская машина','Уи-уи!','Полицейская машина помогает соблюдать порядок.'],
-['🚛','Мусоровоз','Бр-р-р!','Мусоровоз собирает мусор.'],
-['🚕','Такси','Би-би!','Такси отвозит пассажиров.'],
-['🏍️','Мотоцикл','Р-р-р-р!','Мотоцикл быстро едет по дороге.'],
-['🚗','Легковая машина','Би-би!','Машина едет: вжух!'],
-['🚜','Трактор','Тр-р-р!','Трактор работает в поле.'],
-['🚜','Экскаватор','Коп-коп!','Экскаватор копает землю ковшом.'],
-['🚚','Грузовик','Бр-р-р!','Грузовик перевозит грузы.'],
-['🚁','Вертолёт','Д-д-д-д!','Вертолёт летит и крутит лопастями.'],
-['✈️','Самолёт','У-у-у!','Самолёт летит высоко в небе.'],
-['🚂','Поезд','Ту-ту!','Поезд едет по рельсам.'],
-['🚌','Автобус','Би-би!','Автобус перевозит пассажиров.'],
-['🚜','Бульдозер','Р-р-р!','Бульдозер двигает большие кучи земли.'],
-['🚧','Каток','Вж-ж-ж!','Каток ровняет дорожное покрытие.']
-],
-words:[['🍎','Яблоко','Яблоко!','Красное яблоко.'],['⚽','Мяч','Мяч!','Давай катать мяч!'],['🥛','Молоко','Молоко!','Пей молоко.'],['👟','Ботинок','Ботинок!','Надеваем ботинок.'],['🧸','Мишка','Мишка!','Мишка любит обниматься.'],['🚪','Дверь','Дверь!','Откроем дверь.'],['💧','Вода','Вода!','Вот водичка.'],['🍌','Банан','Банан!','Жёлтый банан.']]
-};
-let list=[],idx=0,mode='';
-function speak(t){if(!('speechSynthesis'in window)){toast('Озвучка недоступна в этом браузере');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='ru-RU';u.rate=.82;speechSynthesis.speak(u)}
-function toast(t){document.getElementById('toast').textContent=t}
-function showSection(k){mode=k;list=data[k];idx=0;render()}
-function render(){let x=list[idx];let c=document.getElementById('content');c.innerHTML=`<h2>${mode==='animals'?'🐾 Животные':mode==='vehicles'?'🚗 Мир техники':'🧸 Первые слова'}</h2><div class="bigpic" id="picture">${x[0]}</div><div class="name">${x[1]}</div><div class="desc">${x[3]}</div><button onclick="speak('${x[1]}! ${x[2]}')">🔊 Послушать</button><button class="alt" onclick="animateItem()">✨ Оживить</button><div><button class="green" onclick="prev()">← Назад</button><button class="green" onclick="next()">Дальше →</button></div><div id="toast">Карточка ${idx+1} из ${list.length}</div>`}
-function next(){idx=(idx+1)%list.length;render()}function prev(){idx=(idx-1+list.length)%list.length;render()}
-function animateItem(){let x=list[idx];let p=document.getElementById('picture');p.classList.remove('car','flash','paw');void p.offsetWidth;p.classList.add(mode==='vehicles'?'car':x[1]==='Кошечка'?'paw':'paw');speak(x[3]+' '+x[2]);if(x[1]==='Пожарная машина')p.classList.add('flash')}
-function showGame(){mode='game';let answer=data.animals[0];let opts=[answer,data.animals[1],data.animals[7]].sort(()=>Math.random()-.5);document.getElementById('content').innerHTML=`<h2>⭐ Найди кошечку!</h2><div class="bigpic">🐱</div><div class="desc">Где кошечка? Нажми на картинку.</div><div class="choices">${opts.map(x=>`<button onclick="gameAnswer('${x[1]}')">${x[0]}</button>`).join('')}</div><div id="toast"></div>`;speak('Найди кошечку')}
-function gameAnswer(n){toast(n==='Кошечка'?'Ура! Молодец! ⭐⭐⭐':'Попробуем ещё раз! Где кошечка?');if(n==='Кошечка'){speak('Молодец! Это кошечка! Мяу-мяу!');confetti()}}
-function confetti(){let c=document.createElement('div');c.textContent='🎉 ⭐ 🎊 ⭐ 🎉';c.style.cssText='font-size:35px;animation:paw .5s infinite alternate';document.getElementById('content').append(c);setTimeout(()=>c.remove(),1800)}
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff0f5"><title>Мир Вовки</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;color:#26324b;background:linear-gradient(145deg,#fff3d6,#ffe8f1,#e6f5ff);min-height:100vh}header{text-align:center;padding:24px 12px}h1{margin:0;color:#6545a0;font-size:40px}main{max-width:850px;margin:auto;padding:12px 16px 32px}.note,.card,.game{background:white;border-radius:22px;padding:15px;text-align:center}.grid,.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.tile{border:0;border-radius:22px;padding:20px 8px;font-size:19px;font-weight:800;min-height:115px}.tile span{display:block;font-size:40px}.pink{background:#ffc3d9}.blue{background:#bce6ff}.yellow{background:#ffeba8}.green{background:#c8f1d0}.purple{background:#dfd1ff}.view{display:none}.active{display:block}.top{display:flex;gap:12px;align-items:center;margin:12px 0}.back,.sound,.choice{border:0;border-radius:14px;padding:12px 16px;font-weight:800;background:#fff0a8;color:#26324b}.back{background:white}.card{padding:12px;box-shadow:0 5px 15px #65718a20}.emoji{font-size:48px;display:block}.name{font-size:18px;font-weight:800}.sound{margin-top:10px}.choice{display:block;width:100%;margin:8px 0;background:#e8f4ff;font-size:18px}@media(min-width:650px){.grid,.cards{grid-template-columns:repeat(3,1fr)}}
+</style></head><body><header><h1>🌈 Мир Вовки</h1><p>Играем, слушаем и учимся!</p></header><main>
+<p class="note">🔊 Нажимай на карточки: услышишь русское название и игровой звуковой эффект.</p>
+<section id="home" class="view active"><div class="grid">
+<button class="tile pink" onclick="show('animals')"><span>🐾</span>Животные</button><button class="tile blue" onclick="show('tech')"><span>🚒</span>Техника</button><button class="tile yellow" onclick="show('words')"><span>🍎</span>Первые слова</button><button class="tile green" onclick="show('games')"><span>🎲</span>Игры</button><button class="tile purple" onclick="show('favorites')"><span>❤️</span>Избранное</button></div></section>
+<section id="animals" class="view"><div class="top"><button class="back" onclick="show('home')">← Назад</button><h2>Животные</h2></div><div id="animalList" class="cards"></div></section>
+<section id="tech" class="view"><div class="top"><button class="back" onclick="show('home')">← Назад</button><h2>Техника</h2></div><div id="techList" class="cards"></div></section>
+<section id="words" class="view"><div class="top"><button class="back" onclick="show('home')">← Назад</button><h2>Первые слова</h2></div><div id="wordList" class="cards"></div></section>
+<section id="favorites" class="view"><div class="top"><button class="back" onclick="show('home')">← Назад</button><h2>Избранное</h2></div><div id="favList" class="cards"></div></section>
+<section id="games" class="view"><div class="top"><button class="back" onclick="show('home')">← Назад</button><h2>Игры</h2></div><div class="game"><h3>Угадай, кто говорит!</h3><p id="question">Нажми «Начать»</p><div id="choices"></div><button class="sound" onclick="question()">Начать 🎉</button><p id="score">Правильных ответов: 0</p></div></section>
+</main><script src="sounds.js"></script><script>
+const animals=[['Кошка','🐱','мяу'],['Собака','🐶','гав'],['Корова','🐮','му'],['Лев','🦁','рык'],['Слон','🐘','труба'],['Лошадь','🐴','и-го-го'],['Пони','🐎','и-го-го'],['Утка','🦆','кря'],['Петух','🐓','кукареку'],['Овца','🐑','бе'],['Свинья','🐷','хрю'],['Лягушка','🐸','ква'],['Лиса','🦊','рык'],['Ворона','🐦‍⬛','кар'],['Дельфин','🐬','пи']];
+const tech=[['Пожарная машина','🚒','сирена'],['Полиция','🚓','сирена'],['Скорая','🚑','сирена'],['Мусоровоз','🚛','мотор'],['Такси','🚕','гудок'],['Мотоцикл','🏍️','мотор'],['Автомобиль','🚗','мотор'],['Джип','🚙','мотор'],['Самокат','🛴','гудок'],['Трактор','🚜','мотор'],['Экскаватор','🚧','мотор'],['Бульдозер','🚜','мотор'],['Кран','🏗️','мотор'],['Самолёт','✈️','самолёт'],['Вертолёт','🚁','мотор'],['Поезд','🚆','гудок'],['Автобус','🚌','гудок'],['Велосипед','🚲','гудок']];
+const words=[['Яблоко','🍎'],['Банан','🍌'],['Мяч','⚽'],['Молоко','🥛'],['Мишка','🧸'],['Ботинок','👟'],['Дверь','🚪'],['Вода','💧'],['Кубики','🧱'],['Книга','📚'],['Мама','👩'],['Папа','👨'],['Чашка','☕'],['Кровать','🛏️']];
+let fav=[];try{fav=JSON.parse(localStorage.getItem('vovki-fav')||'[]')}catch(e){}let points=0,current;
+function say(t){if(window.playSoundForPhrase)window.playSoundForPhrase(t);if(window.speechSynthesis){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='ru-RU';u.rate=.85;speechSynthesis.speak(u)}}
+function card(x,type){let d=document.createElement('div');d.className='card';d.innerHTML='<span class="emoji">'+x[1]+'</span><span class="name">'+x[0]+'</span>';let b=document.createElement('button');b.className='sound';b.textContent='🔊 Слушать';b.onclick=()=>say(x[0]+'! '+(x[2]||''));let f=document.createElement('button');f.className='sound';f.textContent='♡ В избранное';f.onclick=()=>{let k=type+':'+x[0];let i=fav.findIndex(z=>z.k===k);if(i<0)fav.push({k,x,type});else fav.splice(i,1);localStorage.setItem('vovki-fav',JSON.stringify(fav));fillFav()};d.append(b,f);return d}
+function fill(id,arr,type){let e=document.getElementById(id);e.innerHTML='';arr.forEach(x=>e.append(card(x,type)))}
+function fillFav(){let e=document.getElementById('favList');e.innerHTML='';fav.forEach(z=>e.append(card(z.x,z.type)))}
+function show(id){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='favorites')fillFav()}
+function question(){current=animals[Math.floor(Math.random()*animals.length)];document.getElementById('question').textContent='Кто говорит: «'+current[2]+'»?';let opts=[current,...animals.filter(x=>x!==current).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5),e=document.getElementById('choices');e.innerHTML='';opts.forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x[1]+' '+x[0];b.onclick=()=>{if(x===current){points++;say('Правильно! '+x[0]);document.getElementById('question').textContent='Правильно! ⭐ Молодец!'}else{say('Попробуй ещё раз');document.getElementById('question').textContent='Попробуй ещё раз!'}document.getElementById('score').textContent='Правильных ответов: '+points};e.append(b)});if(window.playSoundForPhrase)window.playSoundForPhrase(current[2])}
+fill('animalList',animals,'animal');fill('techList',tech,'tech');fill('wordList',words,'word');
 </script></body></html>
